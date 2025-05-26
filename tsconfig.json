@@ -21,10 +21,10 @@
       "@/*": ["src/*"],
       "@common/*": ["src/common/*"],
       "@modules/*": ["src/modules/*"],
-      "@config /*": ["src/config/*"]
-    }
+      "@config/*": ["src/config/*"]
+    },
+    "types": ["node", "jest"]
   },
-  "types": ["node", "jest"],
-  "include": ["src/**/*", "test/**/*", "ormconfig.ts"],
+  "include": ["src/**/*", "tests/**/*", "ormconfig.ts"],
   "exclude": ["node_modules", "dist"]
 }

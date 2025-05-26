@@ -18,6 +18,7 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
+    "tdd": "jest --watch --verbose --no-coverage --testPathPattern=spec",
     "typeorm": "typeorm-ts-node-commonjs",
     "migration:generate": "pnpm typeorm migration:generate -d ormconfig.ts",
     "migration:create": "pnpm typeorm migration:create",
@@ -82,15 +83,24 @@
       "json",
       "ts"
     ],
-    "rootDir": "src",
+    "rootDir": ".",
     "testRegex": ".*\\.spec\\.ts$",
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"
     },
     "collectCoverageFrom": [
-      "**/*.(t|j)s"
+      "src/**/*.(t|j)s",
+      "!src/**/*.d.ts",
+      "!src/**/*.interface.ts",
+      "!src/**/*.types.ts"
     ],
-    "coverageDirectory": "../coverage",
-    "testEnvironment": "node"
+    "coverageDirectory": "coverage",
+    "testEnvironment": "node",
+    "moduleNameMapping": {
+      "^@/(.*)$": "<rootDir>/src/$1",
+      "^@common/(.*)$": "<rootDir>/src/common/$1",
+      "^@modules/(.*)$": "<rootDir>/src/modules/$1",
+      "^@config/(.*)$": "<rootDir>/src/config/$1"
+    }
   }
 }
