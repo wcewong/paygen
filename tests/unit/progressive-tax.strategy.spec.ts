@@ -1,9 +1,8 @@
 import { ProgressiveTaxStrategy } from '../../src/modules/payslip/strategies/progressive-tax.strategy';
-
 import {
   TaxBracket,
   FinancialMath,
-} from '@/modules/payslip/types/payslip.types';
+} from '../../src/modules/payslip/types/payslip.types';
 
 describe('ProgressiveTaxStrategy (TDD)', () => {
   let strategy: ProgressiveTaxStrategy;
