@@ -79,7 +79,7 @@ export class PayslipEntity {
     length: 3,
     nullable: false,
     name: 'currency_code',
-    default: "'USD'",
+    default: "'MYR'",
     comment: 'ISO 4217 currency code',
   })
   currencyCode!: string;
