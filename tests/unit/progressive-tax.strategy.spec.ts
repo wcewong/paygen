@@ -19,7 +19,6 @@ describe('ProgressiveTaxStrategy (TDD)', () => {
     strategy = new ProgressiveTaxStrategy(defaultTaxBrackets);
   });
 
-  // RED phase
   describe('Sample Tax Computation 1: Annual Salary $60,000', () => {
     it('should calculate total annual tax as $6,000 (600,000 cents)', () => {
       const annualSalaryCents = FinancialMath.dollarsToCents(60000);

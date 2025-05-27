@@ -1,5 +1,4 @@
 import { PayslipBuilder } from '../../src/modules/payslip/builders/payslip.builder';
-import { PayslipCalculationResult } from '../../src/modules/payslip/types/payslip.types';
 
 describe('PayslipBuilder (TDD)', () => {
   let builder: PayslipBuilder;
@@ -10,7 +9,6 @@ describe('PayslipBuilder (TDD)', () => {
 
   describe('Building Valid Payslip', () => {
     it('should build complete payslip with all required fields', () => {
-      // RED tests
       const result = builder
         .setEmployeeName('Ren')
         .setGrossMonthlyIncomeCents(500000)
