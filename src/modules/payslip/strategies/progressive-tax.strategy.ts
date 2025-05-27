@@ -1,6 +1,7 @@
-import { TaxBracket } from '../types/payslip.types';
+import { TaxCalculationStrategy } from '@/modules/payslip/strategies/tax-calculation.strategy.interface';
+import { TaxBracket } from '@/modules/payslip/types/payslip.types';
 
-export class ProgressiveTaxStrategy {
+export class ProgressiveTaxStrategy implements TaxCalculationStrategy {
   private readonly taxBrackets: readonly TaxBracket[];
 
   constructor(taxBrackets: TaxBracket[]) {
@@ -22,24 +23,32 @@ export class ProgressiveTaxStrategy {
     for (const bracket of this.taxBrackets) {
       if (remainingSalaryCents <= 0) break;
 
-      const bracketMin = bracket.minCents;
-      const bracketMax = bracket.maxCents ?? Infinity;
+      // upper bound for current bracket
+      const bracketMaxCents = bracket.maxCents ?? Infinity;
+      const bracketWidthCents = bracketMaxCents - bracket.minCents;
 
-      // skip if salary doesn't reach this bracket
-      if (annualSalaryCents <= bracketMin) continue;
+      // total tax amount in current bracket
+      let taxableInBracketCents = 0;
 
-      // calculate taxable amount in this bracket
-      const bracketStart = Math.max(bracketMin, 0);
-      const bracketEnd = Math.min(bracketMax, annualSalaryCents);
-      const taxableInBracket = Math.max(0, bracketEnd - bracketStart);
+      if (annualSalaryCents > bracket.minCents) {
+        // salary exceeds bracket floor
+        const salaryAboveBracketMinCents = annualSalaryCents - bracket.minCents;
+        taxableInBracketCents = Math.min(
+          salaryAboveBracketMinCents,
+          bracketWidthCents,
+        );
+      }
 
-      if (taxableInBracket > 0) {
-        const taxForThisBracket = Math.round(taxableInBracket * bracket.rate);
-        totalTaxCents += taxForThisBracket;
+      if (taxableInBracketCents > 0) {
+        const taxForBracketCents = Math.round(
+          taxableInBracketCents * bracket.rate,
+        );
+        totalTaxCents += taxForBracketCents;
+        remainingSalaryCents -= taxableInBracketCents;
       }
     }
 
-    return Math.round(totalTaxCents);
+    return totalTaxCents;
   }
 
   getStrategyName(): string {

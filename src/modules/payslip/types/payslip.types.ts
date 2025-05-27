@@ -18,6 +18,16 @@ export interface PayslipCalculationResult {
   readonly netMonthlyIncomeDisplay: string;
 }
 
+// for payslip builder
+export interface PayslipBuildingData {
+  employeeName?: string;
+  grossMonthlyIncomeCents?: number;
+  monthlyIncomeTaxCents?: number;
+  netMonthlyIncomeCents?: number;
+  calculatedAt?: Date;
+  currencyCode?: string;
+}
+
 export interface PayslipRecord {
   readonly id?: string;
   readonly timestamp: Date;
