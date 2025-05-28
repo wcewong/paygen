@@ -1,11 +1,11 @@
 import { Between, DataSource } from 'typeorm';
-import { PayslipRepository } from '../../src/modules/payslip/repositories/payslip.repository';
-import { IPayslipRepository } from '../../src/modules/payslip/repositories/payslip.repository.interface';
-import { PayslipEntity } from '../../src/modules/payslip/entities/payslip.entity';
+import { PayslipRepository } from '@/modules/payslip/repositories/payslip.repository';
+import { IPayslipRepository } from '@/modules/payslip/repositories/payslip.repository.interface';
+import { PayslipEntity } from '@/modules/payslip/entities/payslip.entity';
 import {
   PayslipRecord,
   FinancialMath,
-} from '../../src/modules/payslip/types/payslip.types';
+} from '@/modules/payslip/types/payslip.types';
 
 const createMockRepository = (): Record<string, jest.Mock> => ({
   create: jest.fn(),
@@ -39,7 +39,7 @@ describe('PayslipRepository (TDD)', () => {
   describe('Save Payslip Record', () => {
     it('should save payslip record successfully', async () => {
       const payslipData: Omit<PayslipRecord, 'id'> = {
-        timestamp: new Date('2024-01-15T10:30:00Z'),
+        timestamp: new Date('2025-05-15T10:30:00Z'),
         employeeName: 'Ren',
         annualSalaryCents: FinancialMath.dollarsToCents(60000),
         monthlyIncomeTaxCents: FinancialMath.dollarsToCents(500),
@@ -134,7 +134,7 @@ describe('PayslipRepository (TDD)', () => {
           monthlyIncomeTaxCents: 50000,
           grossMonthlyIncomeCents: 500000,
           netMonthlyIncomeCents: 450000,
-          currencyCode: 'MYR', // Fixed: was currency_code
+          currencyCode: 'MYR',
           taxStrategyUsed: 'Progressive Tax Strategy',
         },
       ];

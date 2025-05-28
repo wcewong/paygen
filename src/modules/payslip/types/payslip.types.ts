@@ -24,8 +24,8 @@ export interface PayslipBuildingData {
   grossMonthlyIncomeCents?: number;
   monthlyIncomeTaxCents?: number;
   netMonthlyIncomeCents?: number;
-  calculatedAt?: Date;
   currencyCode?: string;
+  calculatedAt?: Date;
 }
 
 export interface PayslipRecord {
