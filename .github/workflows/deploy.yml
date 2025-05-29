@@ -46,6 +46,12 @@ jobs:
           NODE_ENV: ${{ vars.NODE_ENV }}
           PORT: ${{ vars.PORT }}
           API_PREFIX: ${{ vars.API_PREFIX }}
+          LOG_LEVEL: ${{ vars.LOG_LEVEL }}
+          CORS_ORIGIN: ${{ vars.CORS_ORIGIN }}
+          DEFAULT_CURRENCY: ${{ vars.DEFAULT_CURRENCY }}
+          PRECISION_DECIMAL_PLACES: ${{ vars.PRECISION_DECIMAL_PLACES }}
+          SWAGGER_ENABLED: ${{ vars.SWAGGER_ENABLED }}
+          SWAGGER_PATH: ${{ vars.SWAGGER_PATH }}
           DB_HOST: ${{ secrets.DB_HOST }}
           DB_PORT: ${{ secrets.DB_PORT }}
           DB_USERNAME: ${{ secrets.DB_USERNAME }}
@@ -76,6 +82,12 @@ jobs:
             DB_USERNAME=${DB_USERNAME}
             DB_PASSWORD=${DB_PASSWORD}
             DB_NAME=${DB_NAME}
+            LOG_LEVEL=${LOG_LEVEL}
+            CORS_ORIGIN=${CORS_ORIGIN}
+            DEFAULT_CURRENCY=${DEFAULT_CURRENCY}
+            PRECISION_DECIMAL_PLACES=${PRECISION_DECIMAL_PLACES}
+            SWAGGER_ENABLED=${SWAGGER_ENABLED}
+            SWAGGER_PATH=${SWAGGER_PATH}
             EOF
 
             chmod 600 .env
