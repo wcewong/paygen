@@ -27,11 +27,42 @@ import { SalaryComputationsResponseDto } from '@/modules/payslip/dto/salary-comp
 import { GeneratePayslipRequestDto } from '@/modules/payslip/dto/generate-payslip-request.dto';
 import { GeneratePayslipResponseDto } from '@/modules/payslip/dto/generate-payslip-response.dto';
 
+interface HealthCheckResponse {
+  status: string;
+  timestamp: string;
+  uptime: number;
+}
+
 @Controller('payslip')
 export class PayslipController {
   private readonly logger = new Logger(PayslipController.name);
 
   constructor(private readonly payslipService: PayslipService) {}
+
+  // GET /healthcheck - simple health check to facilitate CI/CD
+  @Get('health')
+  @ApiOperation({
+    summary: 'Health check',
+    description: 'Simple health check endpoint',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Service is healthy',
+    schema: {
+      example: {
+        status: 'ok',
+        timestamp: '2025-05-29T10:30:00.000Z',
+        uptime: 3600.123,
+      },
+    },
+  })
+  healthCheck(): HealthCheckResponse {
+    return {
+      status: 'OK',
+      timestamp: new Date().toISOString(),
+      uptime: process.uptime(),
+    };
+  }
 
   // POST /payslip - generate monthly payslip computation
   @Post()
