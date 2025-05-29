@@ -1,9 +1,8 @@
-// src/app.module.ts
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { PayslipEntity } from '@/modules/payslip/entities/payslip.entity';
-// import { PayslipModule } from '@/modules/payslip/payslip.module';
+import { PayslipModule } from '@/modules/payslip/payslip.module';
 
 @Module({
   imports: [
@@ -31,7 +30,7 @@ import { PayslipEntity } from '@/modules/payslip/entities/payslip.entity';
         logging: configService.get<string>('NODE_ENV') !== 'production',
       }),
     }),
-    // PayslipModule,
+    PayslipModule,
   ],
 })
 export class AppModule {}
