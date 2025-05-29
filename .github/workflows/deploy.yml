@@ -63,7 +63,7 @@ jobs:
           username: ${{ secrets.LINODE_USERNAME }}
           port: ${{ secrets.SSH_PORT }}
           key: ${{ secrets.LINODE_SSH_PRIVATE_KEY }}
-          envs: NODE_ENV,PORT,API_PREFIX,DB_HOST,DB_PORT,DB_USERNAME,DB_PASSWORD,DB_NAME
+          envs: NODE_ENV,PORT,API_PREFIX,DB_HOST,DB_PORT,DB_USERNAME,DB_PASSWORD,DB_NAME,LOG_LEVEL,CORS_ORIGIN,DEFAULT_CURRENCY,PRECISION_DECIMAL_PLACES,SWAGGER_ENABLED,SWAGGER_PATH
           script: |
             cd /var/www/paygen.api || mkdir -p /var/www/paygen.api && cd /var/www/paygen.api
 
