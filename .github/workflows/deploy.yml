@@ -94,7 +94,7 @@ jobs:
                 container_name: paygen-api-container
                 restart: always
                 ports:
-                  - "80:3222"
+                  - "3222:3222"
                 volumes:
                   - ./.env:/app/.env
                 healthcheck:
